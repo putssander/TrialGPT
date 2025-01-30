@@ -10,12 +10,14 @@ from openai import AzureOpenAI
 
 import sys
 
-client = AzureOpenAI(
-	api_version="2023-09-01-preview",
-	azure_endpoint=os.getenv("OPENAI_ENDPOINT"),
-	api_key=os.getenv("OPENAI_API_KEY"),
-)
+# client = AzureOpenAI(
+# 	api_version="2023-09-01-preview",
+# 	azure_endpoint=os.getenv("OPENAI_ENDPOINT"),
+# 	api_key=os.getenv("OPENAI_API_KEY"),
+# )
 
+import aisuite as ai
+client = ai.Client()
 
 def get_keyword_generation_messages(note):
 	system = 'You are a helpful assistant and your task is to help search relevant clinical trials for a given patient description. Please first summarize the main medical problems of the patient. Then generate up to 32 key conditions for searching relevant clinical trials for this patient. The key condition list should be ranked by priority. Please output only a JSON dict formatted as Dict{{"summary": Str(summary), "conditions": List[Str(condition)]}}.'

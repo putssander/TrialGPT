@@ -27,6 +27,7 @@ if __name__ == "__main__":
 
 	for instance in dataset:
 		# Dict{'patient': Str(patient), '0': Str(NCTID), ...}
+		print(instance["patient_id"])
 		patient_id = instance["patient_id"]
 		patient = instance["patient"]
 		sents = sent_tokenize(patient)

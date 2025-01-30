@@ -9,13 +9,21 @@ from nltk.tokenize import sent_tokenize
 import time
 import os
 
-from openai import AzureOpenAI
+# from openai import AzureOpenAI
 
-client = AzureOpenAI(
-	api_version="2023-09-01-preview",
-	azure_endpoint=os.getenv("OPENAI_ENDPOINT"),
-	api_key=os.getenv("OPENAI_API_KEY"),
-)
+# client = AzureOpenAI(
+# 	api_version="2023-09-01-preview",
+# 	azure_endpoint=os.getenv("OPENAI_ENDPOINT"),
+# 	api_key=os.getenv("OPENAI_API_KEY"),
+# )
+
+import aisuite as ai
+client = ai.Client()
+
+models = ["openai:gpt-4o", "anthropic:claude-3-5-sonnet-20240620"]
+models = ["ollama:llama3.2"]
+models = ["ollama:phi4"]
+
 
 def parse_criteria(criteria):
 	output = ""

@@ -54,6 +54,10 @@ Specifically, one can run the code below for keyword generation. The generated k
 python trialgpt_retrieval/keyword_generation.py sigir gpt-4-turbo
 python trialgpt_retrieval/keyword_generation.py trec_2021 gpt-4-turbo
 python trialgpt_retrieval/keyword_generation.py trec_2022 gpt-4-turbo
+
+this becomes:
+python trialgpt_retrieval/keyword_generation.py mstr ollama:phi4
+
 ```
 
 After generating the keywords, one can run the code below for retrieving relevant clinical trials. The retrieved trials will be saved in the `./results/` directory. The code below will use our cached results of keyword generation that are located in `./dataset/{corpus}/id2queries.json`.
@@ -83,6 +87,10 @@ After retrieving the candidate clinical trials with TrialGPT-Retrieval, the next
 python trialgpt_matching/run_matching.py sigir gpt-4-turbo
 python trialgpt_matching/run_matching.py trec_2021 gpt-4-turbo
 python trialgpt_matching/run_matching.py trec_2022 gpt-4-turbo
+
+this becomes:
+python trialgpt_matching/run_matching.py sigir ollama:phi4
+etc...
 ```
 
 ## TrialGPT-Ranking
