@@ -17,7 +17,14 @@ import sys
 # )
 
 import aisuite as ai
+import logging
+
 client = ai.Client()
+client.configure({
+  "ollama" : {
+    "timeout": 600,
+  }
+});
 
 def get_keyword_generation_messages(note):
 	system = 'You are a helpful assistant and your task is to help search relevant clinical trials for a given patient description. Please first summarize the main medical problems of the patient. Then generate up to 32 key conditions for searching relevant clinical trials for this patient. The key condition list should be ranked by priority. Please output only a JSON dict formatted as Dict{{"summary": Str(summary), "conditions": List[Str(condition)]}}.'
@@ -42,10 +49,18 @@ if __name__ == "__main__":
 	outputs = {}
 	
 	with open(f"dataset/{corpus}/queries.jsonl", "r") as f:
+		line_number = 0
 		for line in f.readlines():
-			entry = json.loads(line)
+			line_number += 1
+			try:
+				entry = json.loads(line)  # Parse JSON
+			except json.JSONDecodeError as e:
+				logging.error(f"Invalid JSON at line {line_number}: {e}\nLine content: {line.strip()}")
+				print(f"Error parsing JSON on line {line_number}: {e}")  # Print for immediate feedback
+				continue	
 			messages = get_keyword_generation_messages(entry["text"])
 
+			print(f"request for chat completion sent to model={model}")
 			response = client.chat.completions.create(
 				model=model,
 				messages=messages,
@@ -54,8 +69,8 @@ if __name__ == "__main__":
 
 			output = response.choices[0].message.content
 			output = output.strip("`").strip("json")
-			
+			print(output)
+   
 			outputs[entry["_id"]] = json.loads(output)
-
 			with open(f"results/retrieval_keywords_{model}_{corpus}.json", "w") as f:
 				json.dump(outputs, f, indent=4)

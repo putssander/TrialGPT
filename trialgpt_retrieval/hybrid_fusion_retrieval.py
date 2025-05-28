@@ -159,7 +159,7 @@ if __name__ == "__main__":
 			# get the keyword list
 			if q_type in ["raw", "human_summary"]:
 				conditions = [id2queries[qid][q_type]]
-			elif "turbo" in q_type:
+			elif "turbo" or "ollama" in q_type:
 				conditions = id2queries[qid][q_type]["conditions"]
 			elif "Clinician" in q_type:
 				conditions = id2queries[qid].get(q_type, [])

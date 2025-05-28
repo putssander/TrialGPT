@@ -4,3 +4,5 @@ dataset/mstr/*
 *.pyc
 *.webui_secret_key
 
+
+dataset/mstro/docs*
