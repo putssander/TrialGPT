@@ -1,8 +1,6 @@
 notebooks/myenv/*
 dataset/mstr/*
+dataset/mstro/*
 *.ipynb_checkpoints
 *.pyc
 *.webui_secret_key
-
-
-dataset/mstro/docs*
