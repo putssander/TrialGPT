@@ -19,6 +19,12 @@ import os
 
 import aisuite as ai
 client = ai.Client()
+client.configure({
+  "ollama" : {
+    "timeout": 600,
+	"temperature": 0.0,
+  }
+})
 
 models = ["openai:gpt-4o", "anthropic:claude-3-5-sonnet-20240620"]
 models = ["ollama:llama3.2"]

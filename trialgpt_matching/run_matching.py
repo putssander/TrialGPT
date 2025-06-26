@@ -17,7 +17,8 @@ if __name__ == "__main__":
 	
 	dataset = json.load(open(f"dataset/{corpus}/retrieved_trials.json"))
 
-	output_path = f"results/matching_results_{corpus}_{model}.json" 
+	model_alphanum = ''.join(c for c in model if c.isalnum())
+	output_path = f"results/matching_results_{corpus}_{model_alphanum}.json" 
 
 	# Dict{Str(patient_id): Dict{Str(label): Dict{Str(trial_id): Str(output)}}}
 	if os.path.exists(output_path):
